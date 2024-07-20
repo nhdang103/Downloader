@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author cenxiaozhong
@@ -48,7 +49,8 @@ public final class DownloadImpl {
                 if (mContext == null) {
                     current = mContext = context.getApplicationContext();
                     String action = Runtime.getInstance().append(context, NotificationCancelReceiver.ACTION);
-                    current.registerReceiver(new NotificationCancelReceiver(), new IntentFilter(action));
+                    // current.registerReceiver(new NotificationCancelReceiver(), new IntentFilter(action));
+                    ContextCompat.registerReceiver(current, new NotificationCancelReceiver(), new IntentFilter(action), ContextCompat.RECEIVER_EXPORTED);
                     Runtime.getInstance().log(TAG, "registerReceiver:" + action);
 
                 }
